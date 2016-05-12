@@ -16,13 +16,15 @@ SOURCES += main.cpp \
     libmodbus/src/modbus-tcp.c \
     libmodbus/src/modbus-ascii.c \
     libmodbus/src/modbus.h \
-    modbus_communicator.cpp
+    modbus_communicator.cpp \
+    main_timer.cpp
 
 HEADERS += \
     libmodbus/src/modbus.h \
     imodbus.h \
     imodbus.h \
-    modbus_communicator.h
+    modbus_communicator.h \
+    main_timer.h
 
 
 INCLUDEPATH += libmodbus \
