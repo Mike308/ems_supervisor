@@ -18,6 +18,7 @@ public:
     int check_and_select_device(int device_address);
     int check_and_get_data_from_device(int device, int quanity, int addr, uint16_t * data);
 
+
 private:
     int check_connection_status();
     modbus_t* mb_port;

@@ -17,14 +17,14 @@ SOURCES += main.cpp \
     libmodbus/src/modbus-ascii.c \
     libmodbus/src/modbus.h \
     modbus_communicator.cpp \
-    main_timer.cpp
+    ems_supervisor_main_class.cpp
 
 HEADERS += \
     libmodbus/src/modbus.h \
     imodbus.h \
     imodbus.h \
     modbus_communicator.h \
-    main_timer.h
+    ems_supervisor_main_class.h
 
 
 INCLUDEPATH += libmodbus \

@@ -78,3 +78,5 @@ int modbus_communicator::check_and_get_data_from_device(int device, int quanity,
 
 
 
+
+
