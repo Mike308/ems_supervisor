@@ -6,12 +6,7 @@ ems_database::ems_database()
 
 }
 
-void ems_database::open_db(QString host_name, QString db_name, QString user_name, QString password){
-
-    ems_db.setHostName(host_name);
-    ems_db.setDatabaseName(db_name);
-    ems_db.setUserName(user_name);
-    ems_db.setPassword(password);
+void ems_database::check_connection_status(){
 
     if(!ems_db.open()){
 
@@ -23,6 +18,43 @@ void ems_database::open_db(QString host_name, QString db_name, QString user_name
 
     }
 }
+
+void ems_database::open_db(QString host_name, QString db_name, QString user_name, QString password){
+
+    ems_db.setHostName(host_name);
+    ems_db.setDatabaseName(db_name);
+    ems_db.setUserName(user_name);
+    ems_db.setPassword(password);
+
+    check_connection_status();
+
+
+
+}
+
+void ems_database::insert_temperatures_into_db(QString id, int temperature){
+
+    QSqlQuery insert_temperatures;
+
+    insert_temperatures.prepare("insert into ds18b20_list (id,temperature) values(:id,:temp)");
+
+    insert_temperatures.bindValue(":id",id);
+    insert_temperatures.bindValue(":temp",temperature);
+
+    bool test =  insert_temperatures.exec();
+    if(test==true){
+
+        qDebug () <<"OK";
+    }else{
+
+        qDebug () <<"FAIL";
+
+    }
+
+
+}
+
+
 
 
 

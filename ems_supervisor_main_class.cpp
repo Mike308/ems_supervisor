@@ -6,6 +6,7 @@ ems_supervisor_main_class::ems_supervisor_main_class()
   connect(timer,SIGNAL(timeout()),this,SLOT(agents_pool_update()));
   //mb.check_and_connect_to_modbus_network("COM9",9600,'E',8,1);
   ems_db.open_db("localhost","ems","root","");
+  ems_db.insert_temperatures_into_db("23F",69);
 
 
 
