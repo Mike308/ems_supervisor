@@ -54,6 +54,29 @@ void ems_database::insert_temperatures_into_db(QString id, int temperature){
 
 }
 
+void ems_database::insert_energy_consumption_int_db(int energy_consumption){
+
+    QSqlQuery insert_energy_consumption;
+
+    insert_energy_consumption.prepare("insert into energy_measurements (energy_consum) values(:energy_m)");
+
+    insert_energy_consumption.bindValue(":energy_m",energy_consumption);
+
+    bool test = insert_energy_consumption.exec();
+
+    if(test==true){
+
+        qDebug () << "OK";
+
+    }else{
+
+        qDebug () << "FAIL";
+
+    }
+
+
+}
+
 
 
 
