@@ -57,22 +57,10 @@ void ems_supervisor_main_class::process_temperature_data(uint16_t *temperature_a
 
 void ems_supervisor_main_class::agents_pool_update(){
 
-//  mb.check_and_get_data_from_device(9,4,1000,slave_1);
-//  mb.check_and_get_data_from_device(10,4,1000,slave_2);
-
-//  for(int i=0; i<4; i++){
-
-//      qDebug () << "R1" << "[ " << i << "]" << ": " << slave_1[i];
+  mb.check_and_get_data_from_device(9,4,1000,slave_1);
+  mb.check_and_get_data_from_device(10,4,1000,slave_2);
 
 
-//  }
-
-//  for(int i=0; i<4; i++){
-
-//      qDebug () << "R2" << "[ " << i << "]" << ": " << slave_2[i];
-
-
-//  }
 
 
 }

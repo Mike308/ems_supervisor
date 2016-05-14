@@ -35,6 +35,7 @@ private:
 
     void process_temperature_data(uint16_t *temperature_array);
     void process_energy_consumption_data(uint16_t *energy_consumption_array);
+    
 
 
 
