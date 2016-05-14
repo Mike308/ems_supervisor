@@ -6,6 +6,8 @@
 #include <QTimer>
 
 #include "modbus_communicator.h"
+#include "ems_database.h"
+
 #ifdef DEBUG
 
     #include <QDebug>
@@ -26,6 +28,7 @@ public:
 private:
     QTimer *timer;
     modbus_communicator mb;
+    ems_database ems_db;
     uint16_t slave_1[1024];
     uint16_t slave_2[1024];
 

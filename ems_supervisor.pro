@@ -1,4 +1,5 @@
 QT += core
+QT+=sql
 QT -= gui
 
 CONFIG += c++11
@@ -17,14 +18,16 @@ SOURCES += main.cpp \
     libmodbus/src/modbus-ascii.c \
     libmodbus/src/modbus.h \
     modbus_communicator.cpp \
-    ems_supervisor_main_class.cpp
+    ems_supervisor_main_class.cpp \
+    ems_database.cpp
 
 HEADERS += \
     libmodbus/src/modbus.h \
     imodbus.h \
     imodbus.h \
     modbus_communicator.h \
-    ems_supervisor_main_class.h
+    ems_supervisor_main_class.h \
+    ems_database.h
 
 
 INCLUDEPATH += libmodbus \
