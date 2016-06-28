@@ -1,12 +1,15 @@
 #include "ems_supervisor_main_class.h"
+#include <fstream>
+
 
 ems_supervisor_main_class::ems_supervisor_main_class()
 {
 
     timer = new QTimer(this);
     connect(timer,SIGNAL(timeout()),this,SLOT(agents_pool_update()));
-    mb.check_and_connect_to_modbus_network("COM9",9600,'E',8,1);
-    ems_db.open_db("localhost","ems","root","");
+    int status =  mb.check_and_connect_to_modbus_network("/dev/ttyUSB0",9600,'E',8,1);
+    qDebug()<<"Status"<< status;
+    ems_db.open_db("localhost","EMS","root","code6699");
 
 
 
@@ -54,6 +57,17 @@ void ems_supervisor_main_class::process_temperature_data(uint16_t *temperature_a
 
 }
 
+void ems_supervisor_main_class::process_air_quality(int air_quality){
+
+    ems_db.insert_air_quality(air_quality);
+
+}
+
+void ems_supervisor_main_class::process_water_consumption(int water){
+
+    ems_db.insert_water_consumption(water);
+}
+
 
 
 
@@ -61,15 +75,29 @@ void ems_supervisor_main_class::process_temperature_data(uint16_t *temperature_a
 
 void ems_supervisor_main_class::agents_pool_update(){
 
-    int status2 =  mb.check_and_get_data_from_device(9,4,1000,slave_2);
-    int status =  mb.check_and_get_data_from_device(10,16,1000,slave_1);
-    qDebug () << "Slave: 10" <<  status;
-    //qDebug () << "Slave: 9" << status2;
 
-    if(status!=-1){
-        process_temperature_data(slave_1);
-        process_energy_consumption_data(slave_2);
-    }
+
+
+      if(cnt%2==0 || cnt == 0){
+
+          int status = mb.check_and_get_data_from_device(10,16,1000,slave_1);
+          qDebug() << "Slave 10: " << status ;
+          process_temperature_data(slave_1);
+          process_air_quality((rand()%50)+1000);
+          process_water_consumption((rand()%50)+100);
+
+
+      }else{
+
+          int status2 = mb.check_and_get_data_from_device(9,4,1000,slave_2);
+          qDebug() << "Slave 9: " << status2 ;
+          process_energy_consumption_data(slave_2);
+      }
+
+
+
+
+    cnt++;
 
 
 

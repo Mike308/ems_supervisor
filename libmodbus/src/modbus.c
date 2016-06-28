@@ -1395,9 +1395,7 @@ static int write_single(modbus_t *ctx, int function, int addr, int value)
 int modbus_write_bit(modbus_t *ctx, int addr, int status)
 {
     if (ctx == NULL) {
-
         errno = EINVAL;
-
         return -1;
     }
 

@@ -32,9 +32,13 @@ private:
     ems_database ems_db;
     uint16_t slave_1[1024];
     uint16_t slave_2[1024];
+    int cnt;
 
     void process_temperature_data(uint16_t *temperature_array);
     void process_energy_consumption_data(uint16_t *energy_consumption_array);
+    void process_water_consumption(int water);
+    void process_air_quality(int air_quality);
+
 
 
 

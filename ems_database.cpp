@@ -57,10 +57,11 @@ void ems_database::insert_temperatures_into_db(QString id, int temperature){
 void ems_database::insert_energy_consumption_int_db(int energy_consumption){
 
     QSqlQuery insert_energy_consumption;
-
-    insert_energy_consumption.prepare("insert into energy_measurements (energy_consum) values(:energy_m)");
+    int cost = 5 * energy_consumption;
+    insert_energy_consumption.prepare("insert into energy_measurements (energy_consum,cost) values(:energy_m,:cost)");
 
     insert_energy_consumption.bindValue(":energy_m",energy_consumption);
+    insert_energy_consumption.bindValue(":cost",cost);
 
     bool test = insert_energy_consumption.exec();
 
@@ -76,6 +77,51 @@ void ems_database::insert_energy_consumption_int_db(int energy_consumption){
 
 
 }
+
+void ems_database::insert_air_quality(int air_quality){
+
+    QSqlQuery insert_air_quality;
+
+    insert_air_quality.prepare("insert into air_quality (concentration) values(:concentration)");
+
+    insert_air_quality.bindValue(":concentration",air_quality);
+
+    bool test = insert_air_quality.exec();
+
+    if(test==true){
+
+        qDebug () << "OK";
+
+    }else{
+
+        qDebug () << "FAIL";
+
+    }
+
+}
+
+void ems_database::insert_water_consumption(int water_consumption){
+
+    QSqlQuery insert_water_consumption;
+
+    insert_water_consumption.prepare("insert into water_measurement (water_consumption) values(:water)");
+
+    insert_water_consumption.bindValue(":water",water_consumption);
+
+    bool test = insert_water_consumption.exec();
+
+    if(test==true){
+
+        qDebug () << "OK";
+
+    }else{
+
+        qDebug () << "FAIL";
+
+    }
+}
+
+
 
 
 

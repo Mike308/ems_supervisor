@@ -48,12 +48,12 @@ int modbus_communicator::check_and_get_data_from_device(int device, int quanity,
 
     if(status!=0){
 
-        qDebug () << modbus_strerror(errno);
+        //qDebug () << modbus_strerror(errno);
         return modbus_read_registers(mb_port,addr,quanity,data);
 
 
     }else {
-         qDebug () << modbus_strerror(errno);
+         //qDebug () << modbus_strerror(errno);
         return modbus_read_registers(mb_port,addr,quanity,data);
 
 
