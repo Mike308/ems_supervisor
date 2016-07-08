@@ -6,7 +6,7 @@
 #include <QTimer>
 
 
-#include "modbus_communicator.h"
+#include "qextserialport.h"
 #include "ems_database.h"
 
 #ifdef DEBUG
@@ -28,19 +28,23 @@ public:
 
 private:
     QTimer *timer;
-    modbus_communicator mb;
+    QextSerialPort *port;
     ems_database ems_db;
     uint16_t slave_1[1024];
     uint16_t slave_2[1024];
 
     void process_temperature_data(uint16_t *temperature_array);
     void process_energy_consumption_data(uint16_t *energy_consumption_array);
+    void open_port(QString port_name);
+    void serial_port_write(QString data);
+
 
 
 
 
 public slots:
     void agents_pool_update();
+    void onReadyRead();
 
 
 };
