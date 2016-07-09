@@ -52,6 +52,25 @@ void ems_supervisor_main_class::stop_agents_pooling(){
 }
 
 
+void ems_supervisor_main_class::get_and_process_data_from_slaves(QString s){
+
+    qDebug () << "Received data: " << s;
+
+    QStringList items = s.split('^');
+
+    QString id = items[0];
+    qDebug () << id;
+    if(QString::compare("T",id,Qt::CaseInsensitive)==0){
+
+        process_temperature_data(s);
+
+    }
+
+
+
+}
+
+
 void ems_supervisor_main_class::process_energy_consumption_data(uint16_t *energy_consumption_array){
 
     int energy_consumption = energy_consumption_array[0];
@@ -61,16 +80,13 @@ void ems_supervisor_main_class::process_energy_consumption_data(uint16_t *energy
 
 }
 
-void ems_supervisor_main_class::process_temperature_data(uint16_t *temperature_array){
+void ems_supervisor_main_class::process_temperature_data(QString temperature_data){
 
-    for(int register_adress = 0; register_adress<8; register_adress++){
+    QStringList temperatures = temperature_data.split('^');
 
-        int sensor_id = temperature_array[register_adress];
-        int temperature = temperature_array[register_adress+8];
-        ems_db.insert_temperatures_into_db(QString::number(sensor_id),temperature);
+    for(int i=1; i<temperatures.length()-1; i++){
 
-        qDebug () << register_adress << "ID: "<< sensor_id << "|" << "Temperatura: " << temperature;
-
+        qDebug() << "T[" << i << "]: " << temperatures[i];
 
 
     }
@@ -91,9 +107,17 @@ void ems_supervisor_main_class::agents_pool_update(){
     if(cnt%2==0 || cnt==0){
 
         serial_port_write("1^1");
+        qDebug () << "Debug: " << cnt;
 
+    }else {
+
+
+        serial_port_write("2^1");
+        qDebug () << "Debug: " << cnt;
 
     }
+
+    cnt++;
 
 
 
@@ -111,7 +135,8 @@ void ems_supervisor_main_class::onReadyRead(){
 
         QString str = QString::fromLatin1(port->readLine());
 
-        qDebug () << "Received data: " << str;
+        get_and_process_data_from_slaves(str);
+
 
     }
 
