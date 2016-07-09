@@ -64,6 +64,10 @@ void ems_supervisor_main_class::get_and_process_data_from_slaves(QString s){
 
         process_temperature_data(s);
 
+    }else if(QString::compare("E",id,Qt::CaseInsensitive)==0){
+
+        process_energy_consumption_data(s);
+
     }
 
 
@@ -71,12 +75,15 @@ void ems_supervisor_main_class::get_and_process_data_from_slaves(QString s){
 }
 
 
-void ems_supervisor_main_class::process_energy_consumption_data(uint16_t *energy_consumption_array){
 
-    int energy_consumption = energy_consumption_array[0];
 
-    ems_db.insert_energy_consumption_int_db(energy_consumption);
-    qDebug () << "R1[" << "0" << "]: "<< energy_consumption_array[0];
+void ems_supervisor_main_class::process_energy_consumption_data(QString energy_measurement){
+
+    QStringList energy_measurement_list = energy_measurement.split("^");
+    qDebug() << "Energy consumption: " << energy_measurement_list[1];
+
+
+
 
 }
 

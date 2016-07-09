@@ -34,7 +34,7 @@ private:
     uint16_t slave_2[1024];
 
     void process_temperature_data(QString temperature_data);
-    void process_energy_consumption_data(uint16_t *energy_consumption_array);
+    void process_energy_consumption_data(QString energy_measurement);
     void open_port(QString port_name);
     void serial_port_write(QString data);
     void get_and_process_data_from_slaves(QString s);
