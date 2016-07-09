@@ -30,8 +30,8 @@ private:
     QTimer *timer;
     QextSerialPort *port;
     ems_database ems_db;
-    uint16_t slave_1[1024];
-    uint16_t slave_2[1024];
+    //uint16_t slave_1[1024];
+    //uint16_t slave_2[1024];
 
     void process_temperature_data(QString temperature_data);
     void process_energy_consumption_data(QString energy_measurement);

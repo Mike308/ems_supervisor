@@ -2,7 +2,7 @@
 #include <QDebug>
 #include <iostream>
 
-#include "modbus_communicator.h"
+
 #include "ems_supervisor_main_class.h"
 
 using namespace std;

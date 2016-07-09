@@ -4,9 +4,9 @@ ems_supervisor_main_class::ems_supervisor_main_class()
 {
 
     timer = new QTimer(this);
-    open_port("COM9");
+    open_port("/dev/ttyUSB0");
     connect(timer,SIGNAL(timeout()),this,SLOT(agents_pool_update()));
- //   ems_db.open_db("localhost","ems","root","");
+    ems_db.open_db("localhost","EMS","root","code6699");
 
 
 
@@ -81,6 +81,7 @@ void ems_supervisor_main_class::process_energy_consumption_data(QString energy_m
 
     QStringList energy_measurement_list = energy_measurement.split("^");
     qDebug() << "Energy consumption: " << energy_measurement_list[1];
+    ems_db.insert_energy_consumption_int_db(energy_measurement_list[1].toInt());
 
 
 
@@ -91,9 +92,10 @@ void ems_supervisor_main_class::process_temperature_data(QString temperature_dat
 
     QStringList temperatures = temperature_data.split('^');
 
-    for(int i=1; i<temperatures.length()-1; i++){
+    for(int i=1; i<(temperatures.length()-1)/2; i++){
 
-        qDebug() << "T[" << i << "]: " << temperatures[i];
+        qDebug() << "T[" << i << "]: " << temperatures[i+8];
+        ems_db.insert_temperatures_into_db(temperatures[i],temperatures[i+8].toInt());
 
 
     }
