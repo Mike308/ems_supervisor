@@ -32,14 +32,16 @@ void ems_database::open_db(QString host_name, QString db_name, QString user_name
 
 }
 
-void ems_database::insert_temperatures_into_db(QString id, int temperature){
+
+
+void ems_database::insert_into_current_measurement(QString id, float result){
 
     QSqlQuery insert_temperatures;
 
-    insert_temperatures.prepare("insert into ds18b20_list (id,temperature) values(:id,:temp)");
+    insert_temperatures.prepare("insert into current_measurment (phase_no,result) values(:phase_no,:result)");
 
-    insert_temperatures.bindValue(":id",id);
-    insert_temperatures.bindValue(":temp",temperature);
+    insert_temperatures.bindValue(":phase_no",id);
+    insert_temperatures.bindValue(":result",temperature);
 
     bool test =  insert_temperatures.exec();
     if(test==true){
@@ -54,7 +56,7 @@ void ems_database::insert_temperatures_into_db(QString id, int temperature){
 
 }
 
-void ems_database::insert_energy_consumption_int_db(int energy_consumption){
+void ems_database::insert_into_power_measurement(int energy_consumption){
 
     QSqlQuery insert_energy_consumption;
 
