@@ -34,45 +34,46 @@ void ems_database::open_db(QString host_name, QString db_name, QString user_name
 
 
 
-void ems_database::insert_into_current_measurement(QString id, float result){
+void ems_database::insert_into_current_measurement(int id, float result){
 
-    QSqlQuery insert_temperatures;
+    QSqlQuery insert_current_measurement;
 
-    insert_temperatures.prepare("insert into current_measurment (phase_no,result) values(:phase_no,:result)");
+    insert_current_measurement.prepare("insert into current_measurement (phase_no,result) values(:phase_no,:result)");
 
-    insert_temperatures.bindValue(":phase_no",id);
-    insert_temperatures.bindValue(":result",temperature);
+    insert_current_measurement.bindValue(":phase_no",id);
+    insert_current_measurement.bindValue(":result",result);
 
-    bool test =  insert_temperatures.exec();
+    bool test =  insert_current_measurement.exec();
+
     if(test==true){
 
         qDebug () <<"OK";
     }else{
 
         qDebug () <<"FAIL";
+        qDebug () << insert_current_measurement.lastError();
 
     }
 
 
 }
 
-void ems_database::insert_into_power_measurement(int energy_consumption){
+void ems_database::insert_into_power_measurement(int id, float result){
 
-    QSqlQuery insert_energy_consumption;
+    QSqlQuery insert_power_measurement;
 
-    insert_energy_consumption.prepare("insert into energy_measurements (energy_consum) values(:energy_m)");
+    insert_power_measurement.prepare("insert into power_measurement (phase_no,result) values(:phase_no,:result)");
 
-    insert_energy_consumption.bindValue(":energy_m",energy_consumption);
+    insert_power_measurement.bindValue(":phase_no",id);
+    insert_power_measurement.bindValue(":result",result);
 
-    bool test = insert_energy_consumption.exec();
-
+    bool test =  insert_power_measurement.exec();
     if(test==true){
 
-        qDebug () << "OK";
-
+        qDebug () <<"OK";
     }else{
 
-        qDebug () << "FAIL";
+        qDebug () <<"FAIL";
 
     }
 
