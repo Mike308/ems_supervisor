@@ -4,6 +4,7 @@
 
 #include <QObject>
 #include <QTimer>
+#include <QString>
 
 
 #include "qextserialport.h"
