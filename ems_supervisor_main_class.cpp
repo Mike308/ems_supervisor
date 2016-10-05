@@ -77,31 +77,9 @@ void ems_supervisor_main_class::get_and_process_data_from_slaves(QString s){
 
 
 
-void ems_supervisor_main_class::process_energy_consumption_data(QString energy_measurement){
-
-    QStringList energy_measurement_list = energy_measurement.split("^");
-    qDebug() << "Energy consumption: " << energy_measurement_list[1];
-    ems_db.insert_energy_consumption_int_db(energy_measurement_list[1].toInt());
 
 
 
-
-}
-
-void ems_supervisor_main_class::process_temperature_data(QString temperature_data){
-
-    QStringList temperatures = temperature_data.split('^');
-
-    for(int i=1; i<(temperatures.length()-1)/2; i++){
-
-        qDebug() << "T[" << i << "]: " << temperatures[i+8];
-        ems_db.insert_temperatures_into_db(temperatures[i],temperatures[i+8].toInt());
-
-
-    }
-
-
-}
 
 
 
