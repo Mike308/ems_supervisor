@@ -19,6 +19,7 @@ public:
     void open_db(QString host_name, QString db_name, QString user_name, QString password);
     void insert_into_current_measurement(int id, float result);
     void insert_into_power_measurement(int id, float result);
+    float get_voltage();
 
 
 private:
