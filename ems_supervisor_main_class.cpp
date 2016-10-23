@@ -66,17 +66,13 @@ void ems_supervisor_main_class::get_and_process_data_from_slaves(QString s){
         QString l2_current_str = items[2];
         QString l3_current_str = items[3];
 
-        QString l1_power_str = items[4];
-        QString l2_power_str = items[5];
-        QString l3_power_str = items[6];
+
 
         float l1_current = l1_current_str.toFloat();
         float l2_current = l2_current_str.toFloat();
         float l3_current = l3_current_str.toFloat();
 
-        float l1_power = l1_power_str.toFloat();
-        float l2_power = l2_power_str.toFloat();
-        float l3_power = l3_power_str.toFloat();
+
 
         qDebug() << l1_current << "^" << l2_current;
 
@@ -85,9 +81,19 @@ void ems_supervisor_main_class::get_and_process_data_from_slaves(QString s){
         ems_db.insert_into_current_measurement(2,l2_current);
         ems_db.insert_into_current_measurement(3,l3_current);
 
-        ems_db.insert_into_power_measurement(1,l1_power);
-        ems_db.insert_into_power_measurement(2,l2_power);
-        ems_db.insert_into_power_measurement(3,l3_power);
+        float ac_voltage = ems_db.get_voltage();
+
+        float  l1_apparent_power = l1_current*ac_voltage;
+        float  l2_apparent_power = l2_current*ac_voltage;
+        float  l3_apparent_power = l3_current*ac_voltage;
+
+        ems_db.insert_into_power_measurement(1,l1_apparent_power);
+        ems_db.insert_into_power_measurement(2,l2_apparent_power);
+        ems_db.insert_into_power_measurement(3,l3_apparent_power);
+
+
+
+
 
 
 
