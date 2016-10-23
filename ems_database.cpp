@@ -80,6 +80,24 @@ void ems_database::insert_into_power_measurement(int id, float result){
 
 }
 
+float ems_database::get_voltage(){
+
+    float voltage = 0;
+    QSqlQuery select_voltage;
+
+
+    select_voltage.exec("select value from parameters where id = 'ac_voltage'");
+
+    while (select_voltage.next()) {
+
+        voltage = select_voltage.value(0).toFloat();
+
+    }
+
+    return voltage;
+
+}
+
 
 
 
