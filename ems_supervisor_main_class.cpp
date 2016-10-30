@@ -97,6 +97,7 @@ void ems_supervisor_main_class::get_and_process_data_from_slaves(QString s){
 
 
 
+
     }
 
 
@@ -118,22 +119,7 @@ void ems_supervisor_main_class::get_and_process_data_from_slaves(QString s){
 void ems_supervisor_main_class::agents_pool_update(){
 
 
-    static int cnt = 0;
-
-    //    if(cnt%2==0 || cnt==0){
-
-    //        serial_port_write("1^1");
-    //        qDebug () << "Debug: " << cnt;
-
-    //    }else {
-
-
-    //        serial_port_write("2^1");
-    //        qDebug () << "Debug: " << cnt;
-
-    //    }
-
-    cnt++;
+  serial_port_write("s");
 
 
 
